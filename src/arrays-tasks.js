@@ -581,7 +581,6 @@ function selectMany(arr, childrenSelector) {
   return res;
 }
 
-selectMany(['one', 'two', 'three'], (x) => x.split(''));
 /**
  * Returns an element from the multidimensional array by the specified indexes.
  *
@@ -594,8 +593,13 @@ selectMany(['one', 'two', 'three'], (x) => x.split(''));
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  const res = indexes.reduce((acc, item) => {
+    const curr = acc;
+
+    return curr[item];
+  }, arr);
+  return res;
 }
 
 /**
