@@ -22,14 +22,7 @@
  */
 function getIntervalArray(start, end) {
   const arrLength = end - start + 1;
-  const arr = Array(arrLength).fill(0);
-  let currNum = start;
-  const res = arr.map((item) => {
-    let currItem = item;
-    currItem = currNum;
-    currNum += 1;
-    return currItem;
-  });
+  const res = Array.from({ length: arrLength }, (item, index) => index + start);
   return res;
 }
 
@@ -46,8 +39,18 @@ function getIntervalArray(start, end) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  const sizeMax = Math.max(arr1.length, arr2.length);
+  const arr1Max = arr1.concat(Array(sizeMax - arr1.length).fill(0));
+  const arr2Max = arr2.concat(Array(sizeMax - arr2.length).fill(0));
+
+  const res = arr1Max.map((item, index) => {
+    let currItem = item;
+    currItem += arr2Max[index];
+    return currItem;
+  });
+
+  return res;
 }
 
 /**
