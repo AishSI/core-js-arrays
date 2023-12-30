@@ -303,9 +303,7 @@ function flattenArray(/* nestedArray */) {
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  const res = arr.reduce((acc, value) => {
-    return acc.concat(...childrenSelector(value));
-  }, []);
+  const res = arr.flatMap((value) => childrenSelector(value));
   return res;
 }
 
