@@ -298,8 +298,6 @@ function createNDimensionalArray(n, size) {
   return arr;
 }
 
-// console.log(`🚀 ~ createNDimensionalArray():`, createNDimensionalArray(4, 2));
-
 /**
  * Flattens a nested array into a single-level array.
  *
