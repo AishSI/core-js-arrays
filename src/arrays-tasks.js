@@ -564,22 +564,26 @@ function findCommonElements(arr1, arr2) {
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
 function findLongestIncreasingSubsequence(nums) {
-  let maxLength = 0;
-  let prev = nums[0];
-  const result = nums.reduce((acc, item) => {
-    let res = acc;
-    if (item > prev) {
-      res += 1;
-    } else {
-      if (res > maxLength) {
-        maxLength = res;
+  const result = nums.reduce(
+    (acc, item) => {
+      const res = acc;
+      if (item > res.prevItem) {
+        res.lastCount += 1;
+      } else if (res.lastCount > res.maxCount) {
+        [res.lastCount, res.maxCount] = [1, res.lastCount];
+      } else {
+        res.lastCount = 1;
       }
-      res = 1;
+      res.prevItem = item;
+      return res;
+    },
+    {
+      lastCount: 1,
+      maxCount: 1,
+      prevItem: nums[0],
     }
-    prev = item;
-    return res;
-  }, 1);
-  return result > maxLength ? result : maxLength;
+  );
+  return Math.max(result.lastCount, result.maxCount);
 }
 
 /**
